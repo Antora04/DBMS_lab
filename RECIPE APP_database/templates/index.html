@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe App</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            padding: 20px;
+        }
+
+        h1{
+            text-align:center;
+            color: #222;
+        }
+
+        .box{
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input{
+            width: 80%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        button{
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background: #45a049;
+        }
+
+        .recipe{
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1> Recipe Management System</h1>
+
+<!-- ADD -->
+<div class="box">
+<h2>Add Recipe</h2>
+
+<form action="/add" method="POST">
+    Name: <input type="text" name="name"><br>
+    Ingredients: <input type="text" name="ingredients"><br>
+    Instructions: <input type="text" name="instructions"><br><br>
+    <button type="submit">Add Recipe</button>
+</form>
+</div>
+
+<!-- SEARCH -->
+<div class="box">
+<h2>Search Recipe</h2>
+
+<form action="/search" method="POST">
+    Name: <input type="text" name="name">
+    <button type="submit">Search</button>
+</form>
+
+{% if recipe %}
+    <div class="recipe">
+        <h3>{{recipe.name}}</h3>
+
+        {% if recipe.ingredients %}
+            <p><b>Ingredients:</b> {{recipe.ingredients}}</p>
+        {% endif %}
+
+        {% if recipe.instructions %}
+            <p><b>Instructions:</b> {{recipe.instructions}}</p>
+        {% endif %}
+    </div>
+{% endif %}
+</div>
+
+<!-- DELETE -->
+<div class="box">
+<h2>Delete Recipe</h2>
+
+<form action="/delete" method="POST">
+    Name: <input type="text" name="name">
+    <button type="submit">Delete</button>
+</form>
+</div>
+
+<!-- ALL RECIPES -->
+<div class="box">
+<h2> All Recipes</h2>
+
+{% for r in recipes %}
+    <div class="recipe">
+        <h3>{{r.name}}</h3>
+
+        {% if r.ingredients %}
+            <p><b>Ingredients:</b> {{r.ingredients}}</p>
+        {% endif %}
+
+        {% if r.instructions %}
+            <p><b>Instructions:</b> {{r.instructions}}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
